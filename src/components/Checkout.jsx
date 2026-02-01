@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectCartItems } from '../store/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearCart, selectCartItems } from '../store/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector(selectCartItems);
   const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   const [formData, setFormData] = useState({ name: '', address: '', card: '' });
-  //State for tracking errors.
-  const [cardError, setCardError] = useState('');
+  const [cardError, setCardError] = useState(''); //State to track card errors.
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    //NEW: Clear error when user types.
+    
+    //Clear error immediately if user starts typing again.
     if (e.target.name === 'card') {
       setCardError('');
     }
@@ -20,19 +23,24 @@ const Checkout = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //Validation Logic.
+    
+    //Validation Logic
     const cardLength = formData.card.length;
+
     if (cardLength < 16) {
       setCardError("Card number contains less than 16 digits.");
-      return;
+      return; //Stop the function here.
     } 
+    
     if (cardLength > 16) {
       setCardError("Card number contains more than 16 digits.");
-      return;
+      return; //Stop the function here.
     }
-    
-    console.log("Validation Passed");
+
+    //Success Flow 
+    alert("Order placed successfully!");
+    dispatch(clearCart());
+    navigate('/');
   };
 
   return (
@@ -54,10 +62,22 @@ const Checkout = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="checkout-form">
-        <input required name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} />
-        <input required name="address" placeholder="Shipping Address" value={formData.address} onChange={handleChange} />
+        <input 
+          required 
+          name="name" 
+          placeholder="Full Name" 
+          value={formData.name}
+          onChange={handleChange} 
+        />
+        <input 
+          required 
+          name="address" 
+          placeholder="Shipping Address" 
+          value={formData.address}
+          onChange={handleChange} 
+        />
         
-        {/*Input wrapped in a group for error styling.*/}
+        {/*Card Input Wrapper for Error Handling.*/}
         <div className="form-group">
           <input 
             required 
@@ -66,8 +86,10 @@ const Checkout = () => {
             placeholder="Card Number (16 digits)" 
             value={formData.card}
             onChange={handleChange}
+            //Add red border class if there is an error.
             className={cardError ? 'input-error' : ''}
           />
+          {/*Display the specific error message.*/}
           {cardError && <span className="error-msg">{cardError}</span>}
         </div>
 
