@@ -3,24 +3,33 @@ import { useState, useEffect } from 'react';
 const useFetchProducts = (url) => {
   //Initialized state to hold the product list.
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     //Defined the async fetch function.
     const fetchData = async () => {
-      //Basic fetch without error handling (added in next commit).
-      const response = await fetch(url);
-      const result = await response.json();
-      
-      //Update state with the 'products' array from the API response.
-      setData(result.products); 
+      try {
+        //Basic fetch without error handling.
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const result = await response.json();
+        //Update state with the 'products' array from the API response.
+        setData(result.products); // DummyJSON returns.
+      }
+      catch(err){
+        setError(err.message); //Handle errors gracefully.
+      }
+      finally {
+        setLoading(false);
+      }
     };
 
-    //Call the function
+     //Call the function.
     fetchData();
   }, [url]); //Re-run if the URL changes.
 
-  //Return the data so components can use it.
-  return { data };
+  return { data, loading, error };
 };
 
 export default useFetchProducts;
