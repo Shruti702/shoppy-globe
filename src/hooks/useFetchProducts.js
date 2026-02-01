@@ -18,7 +18,7 @@ const useFetchProducts = (url) => {
         setData(result.products); // DummyJSON returns.
       }
       catch(err){
-        setError(err.message); //Handle errors gracefully.
+        setError(err.message); //Handle errors gracefully. 
       }
       finally {
         setLoading(false);
