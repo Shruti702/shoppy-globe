@@ -7,8 +7,10 @@ function App() {
     <>
       <Header />
       <main className="main-content">
+        {/*The Outlet component acts as a placeholder.*/}
         <Outlet />
       </main>
+      {/*Footer displayed at the bottom of the layout.*/}
       <footer className="footer">© 2026 ShoppyGlobe</footer>
     </>
   );

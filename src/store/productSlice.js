@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// A Redux slice to manage product-related state.
 const productSlice = createSlice({
   name: 'products',
   initialState: {
-    searchQuery: '',
+    searchQuery: '', //State to store the user's search input text.
   },
   reducers: {
+    //Reducer function to update the search query in the state.
     setSearchQuery: (state, action) => {
       state.searchQuery = action.payload;
     },
