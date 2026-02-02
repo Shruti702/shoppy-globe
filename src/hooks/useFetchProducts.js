@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+//Custom hook.
 const useFetchProducts = (url) => {
   //Initialized state to hold the product list.
   const [data, setData] = useState([]);

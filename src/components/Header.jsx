@@ -18,12 +18,12 @@ const Header = () => {
 
   return (
     <header className="header">
-    {/* Logo Section - Links back to the Home page */}
+    {/*Logo Section - Links back to the Home page.*/}
       <div className="logo">
         <Link to="/">ShoppyGlobe</Link>
       </div>
 
-      {/* Search Input - Filters products based on user input */}
+      {/*Search Input - Filters products based on user input.*/}
       <input 
         type="text" 
         placeholder="Search products..." 
@@ -31,11 +31,11 @@ const Header = () => {
         onChange={handleSearchChange} 
       />
 
-      {/* Navigation Links */}
+      {/*Navigation Links.*/}
       <nav>
         <Link to="/">Home</Link>
         <Link to="/cart" className="cart-link">
-          Cart <span>({itemCount})</span>
+          🛒 Cart <span>({itemCount})</span>
         </Link>
       </nav>
     </header>

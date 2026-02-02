@@ -21,7 +21,7 @@ const ProductDetail = () => {
       } catch(error) {
         console.error("Failed to fetch product", error);
       } finally {
-        setLoading(false); //Stop loading spinner.
+        setLoading(false); //Stops loading spinner.
       }
     };
     fetchDetail();
