@@ -33,7 +33,7 @@ const ProductDetail = () => {
   return (
     <div className="product-detail">
         {/*Basic rendering of the fetched data.*/}
-      <button onClick={() => navigate(-1)} className="back-btn">← Back</button>
+      <button onClick={() => navigate(-1)} className="back-btn">Back</button>
       <div className="detail-container">
         {/*Render product image with lazy loading optimization.*/}
         <img src={product.thumbnail} alt={product.title} loading="lazy" />
