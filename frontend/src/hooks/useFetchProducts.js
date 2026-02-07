@@ -1,34 +1,40 @@
 import { useState, useEffect } from 'react';
 
-//Custom hook.
 const useFetchProducts = (url) => {
-  //Initialized state to hold the product list.
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    //Defined the async fetch function.
     const fetchData = async () => {
       try {
-        //Basic fetch without error handling.
+        console.log("Fetching from:", url); // <--- DEBUG LOG 1
         const response = await fetch(url);
-        if (!response.ok) throw new Error('Network response was not ok');
+        
+        console.log("Response Status:", response.status); // <--- DEBUG LOG 2
+        
+        if (!response.ok) {
+           // Throw specific error based on status
+           throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+        
         const result = await response.json();
-        //Update state with the 'products' array from the API response.
-        setData(result.products); // DummyJSON returns.
+        console.log("Data received:", result); // <--- DEBUG LOG 3
+        
+        // Handle if backend sends { products: [...] } or just [...]
+        setData(result.products || result); 
       }
       catch(err){
-        setError(err.message); //Handle errors gracefully. 
+        console.error("Fetch Error:", err.message); // <--- DEBUG LOG 4
+        setError(err.message);
       }
       finally {
         setLoading(false);
       }
     };
 
-     //Call the function.
     fetchData();
-  }, [url]); //Re-run if the URL changes.
+  }, [url]);
 
   return { data, loading, error };
 };

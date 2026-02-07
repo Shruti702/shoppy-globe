@@ -6,6 +6,7 @@ import { store } from './store/store';
 import App from './App';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
 
 //Lazy loading components.
 const ProductList = lazy(() => import('./components/ProductList'));
@@ -13,6 +14,9 @@ const ProductDetail = lazy(() => import('./components/ProductDetail'));
 const Cart = lazy(() => import('./components/Cart'));
 const Checkout = lazy(() => import('./components/Checkout'));
 const NotFound = lazy(() => import('./components/NotFound'));
+// NEW: Import the Login and Register components
+const Login = lazy(() => import('./components/Login'));
+const Register = lazy(() => import('./components/Register'));
 
 //Define Routes using the modern Data Router.
 const router = createBrowserRouter([
@@ -34,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Suspense fallback={<div>Loading Cart...</div>}><Cart /></Suspense>,
+      },
+      {
+        path: "/login",
+        element: <Suspense fallback={<div>Loading Login...</div>}><Login /></Suspense>, 
+      },
+      {
+        path: "/register",
+        element: <Suspense fallback={<div>Loading Register...</div>}><Register /></Suspense>, 
       },
       {
         path: "/checkout",

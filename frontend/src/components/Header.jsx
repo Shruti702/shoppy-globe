@@ -1,29 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCartItems } from '../store/cartSlice';
 import { setSearchQuery } from '../store/productSlice';
 
 const Header = () => {
-  //Access the current list of items in the cart from the Redux store.
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
-  //Calculate the total quantity of items in the cart using reduce.
+  const navigate = useNavigate();
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  
+  // Check if user is logged in
+  const token = localStorage.getItem('token');
 
-  //Event handler for the search input.
   const handleSearchChange = (e) => {
     dispatch(setSearchQuery(e.target.value));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Delete token
+    navigate('/login'); // Go to login
+    window.location.reload(); // Refresh to update UI
+  };
+
   return (
     <header className="header">
-    {/*Logo Section - Links back to the Home page.*/}
       <div className="logo">
         <Link to="/">ShoppyGlobe</Link>
       </div>
 
-      {/*Search Input - Filters products based on user input.*/}
       <input 
         type="text" 
         placeholder="Search products..." 
@@ -31,9 +36,21 @@ const Header = () => {
         onChange={handleSearchChange} 
       />
 
-      {/*Navigation Links.*/}
       <nav>
         <Link to="/">Home</Link>
+        
+        {/* Conditional Rendering based on Token */}
+        {!token ? (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        ) : (
+          <button onClick={handleLogout} className="btn" style={{color: 'white', background:'transparent'}}>
+            Logout
+          </button>
+        )}
+        
         <Link to="/cart" className="cart-link">
           🛒 Cart <span>({itemCount})</span>
         </Link>

@@ -25,7 +25,9 @@ body {
   line-height: 1.6;
 }
 
-/*Header & Navigation*/
+/* ===========================
+   Header & Navigation
+   =========================== */
 .header {
   background-color: var(--primary-color);
   color: #fff;
@@ -64,7 +66,7 @@ body {
 
 .header nav {
   display: flex;
-  gap: 25px;
+  gap: 20px;
   align-items: center;
 }
 
@@ -73,6 +75,7 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s;
+  font-size: 0.95rem;
 }
 
 .header a:hover, .header a.cart-link {
@@ -88,13 +91,44 @@ body {
   color: white;
 }
 
-/*Main Layout*/
+/* ===========================
+   Main Layout & Global
+   =========================== */
 .main-content {
   min-height: 80vh;
   padding: 2rem 5%;
 }
 
-/*Product List*/
+button, .btn {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Common Button Styles */
+.add-btn, .checkout-btn, .place-order-btn {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.add-btn:hover, .checkout-btn:hover, .place-order-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+/* ===========================
+   Product List & Cards
+   =========================== */
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -102,7 +136,6 @@ body {
   padding-bottom: 2rem;
 }
 
-/*Product Card*/
 .product-card {
   background: var(--card-bg);
   border-radius: var(--border-radius);
@@ -123,7 +156,7 @@ body {
 .product-card img {
   width: 100%;
   height: 200px;
-  object-fit: contain; /*Keeps whole image visible.*/
+  object-fit: contain;
   margin-bottom: 1rem;
 }
 
@@ -149,32 +182,6 @@ body {
 
 .card-actions a, .card-actions button {
   flex: 1;
-  text-align: center;
-}
-
-/*Buttons*/
-button, .btn {
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-weight: 600;
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-.add-btn, .checkout-btn, .place-order-btn {
-  background-color: var(--accent-color);
-  color: white;
-  padding: 10px 15px;
-  border-radius: 6px;
-  text-decoration: none;
-}
-
-.add-btn:hover, .checkout-btn:hover, .place-order-btn:hover {
-  background-color: var(--accent-hover);
 }
 
 .details-btn, .back-btn {
@@ -184,26 +191,16 @@ button:active {
   border-radius: 6px;
   text-decoration: none;
   display: inline-block;
+  text-align: center;
 }
 
 .details-btn:hover, .back-btn:hover {
   background-color: #e2e8f0;
 }
 
-.remove-btn {
-  background-color: transparent;
-  color: #e74c3c;
-  border: 1px solid #e74c3c;
-  padding: 5px 10px;
-  border-radius: 4px;
-}
-
-.remove-btn:hover {
-  background-color: #e74c3c;
-  color: white;
-}
-
-/*Product Detail Page*/
+/* ===========================
+   Product Detail Page
+   =========================== */
 .product-detail {
   max-width: 1000px;
   margin: 2rem auto;
@@ -249,7 +246,9 @@ button:active {
   margin: 1rem 0 2rem;
 }
 
-/*Cart Page*/
+/* ===========================
+   Cart Page
+   =========================== */
 .cart-page {
   max-width: 800px;
   margin: 0 auto;
@@ -294,8 +293,35 @@ button:active {
   font-weight: bold;
 }
 
-/*Checkout Form*/
-.checkout-page {
+.remove-btn {
+  background-color: transparent;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.remove-btn:hover {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.cart-summary {
+  margin-top: 2rem;
+  text-align: right;
+  border-top: 2px solid #f1f3f5;
+  padding-top: 1rem;
+}
+
+.cart-summary h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* ===========================
+   Checkout & Auth (Login/Register)
+   =========================== */
+.checkout-page, .auth-container {
   max-width: 600px;
   margin: 2rem auto;
   background: var(--card-bg);
@@ -340,7 +366,6 @@ button:active {
   gap: 1.5rem;
 }
 
-/*Modern Input Styles*/
 .checkout-form input {
   width: 100%;
   padding: 14px;
@@ -357,6 +382,26 @@ button:active {
   box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.1);
 }
 
+/* Styles for "New here?" / "Already have account?" links */
+.checkout-form p {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.checkout-form p a {
+  color: var(--accent-color);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.checkout-form p a:hover {
+  text-decoration: underline;
+  color: var(--accent-hover);
+}
+
 .place-order-btn {
   margin-top: 1rem;
   padding: 16px;
@@ -366,54 +411,9 @@ button:active {
   letter-spacing: 1px;
 }
 
-/*Footer*/
-.footer {
-  text-align: center;
-  padding: 2rem;
-  margin-top: auto;
-  color: var(--text-light);
-  font-size: 0.9rem;
-  border-top: 1px solid #eee;
-}
-
-/*Responsive Adjustments*/
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  
-  .header nav {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .detail-container {
-    grid-template-columns: 1fr;
-  }
-
-  .cart-item {
-    grid-template-columns: 60px 1fr;
-    grid-template-rows: auto auto;
-    gap: 0.5rem;
-  }
-  
-  .cart-item .quantity-controls {
-    grid-column: 1 / -1;
-    width: max-content;
-  }
-  
-  .cart-item .remove-btn {
-    grid-column: 1 / -1;
-    width: 100%;
-    text-align: center;
-  }
-}
-
-/*Error Messages*/
+/* Error Messages */
 .input-error {
-  border-color: #e74c3c  !important;
+  border-color: #e74c3c !important;
   background-color: #fdf2f2 !important;
 }
 
@@ -431,19 +431,19 @@ button:active {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/*Ensure form group handles stacking correctly.*/
 .form-group {
   display: flex;
   flex-direction: column;
 }
 
-
-/*404 Page*/
+/* ===========================
+   404 Page
+   =========================== */
 .not-found-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh; /*Centers vertically within the main view.*/
+  min-height: 60vh;
   padding: 2rem;
 }
 
@@ -505,4 +505,55 @@ button:active {
   background-color: var(--accent-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(172, 85, 87, 0.3);
+}
+
+/* ===========================
+   Footer
+   =========================== */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: auto;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .header nav {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap; 
+    gap: 15px;
+  }
+
+  .detail-container {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-item {
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.5rem;
+  }
+  
+  .cart-item .quantity-controls {
+    grid-column: 1 / -1;
+    width: max-content;
+  }
+  
+  .cart-item .remove-btn {
+    grid-column: 1 / -1;
+    width: 100%;
+    text-align: center;
+  }
 }
